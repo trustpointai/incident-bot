@@ -308,26 +308,26 @@ def check_bot_user_in_digest_channel():
     """
     Adds bot user to digest channel if not already present
     """
-    digest_channel_id = get_digest_channel_id()
-    if (
-        bot_user_id
-        not in slack_web_client.conversations_members(
-            channel=digest_channel_id
-        )["members"]
-    ):
-        try:
-            slack_web_client.conversations_join(channel=digest_channel_id)
-            logger.info(
-                f"Added bot user to digest channel #{get_channel_name(channel_id=digest_channel_id)}"
-            )
-        except SlackApiError as error:
-            logger.error(
-                f"Error auto joining bot user to digest channel: {error}"
-            )
-    else:
+    digest_channel_id = "C06KZ2Y4MK9"
+    # if (
+    #     bot_user_id
+    #     not in slack_web_client.conversations_members(
+    #         channel=digest_channel_id
+    #     )["members"]
+    # ):
+    try:
+        slack_web_client.conversations_join(channel=digest_channel_id)
         logger.info(
-            f"Bot user is already present in digest channel #{get_channel_name(channel_id=digest_channel_id)}"
+            f"Added bot user to digest channel #{get_channel_name(channel_id=digest_channel_id)}"
         )
+    except SlackApiError as error:
+        logger.error(
+            f"Error auto joining bot user to digest channel: {error}"
+        )
+    # else:
+    #     logger.info(
+    #         f"Bot user is already present in digest channel #{get_channel_name(channel_id=digest_channel_id)}"
+    #     )
 
 
 def check_user_in_group(user_id: str, group_name: str) -> bool:
