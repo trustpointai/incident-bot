@@ -16,11 +16,13 @@ FROM python:3.11 as base
 # Copy only the relevant Python files into the container.
 COPY --from=frontend /app/build /incident-bot/app
 COPY ./backend/bot /incident-bot/bot
+COPY ./backend/alembic /incident-bot/alembic
 COPY ./backend/requirements.txt /incident-bot
 COPY ./backend/config.py /incident-bot
 COPY ./backend/main.py /incident-bot
 COPY ./backend/iblog.py /incident-bot
 COPY ./scripts/wait-for-it.sh /incident-bot/wait-for-it.sh
+COPY ./backend/Makefile /incident-bot
 
 # Set the work directory to the app folder.
 WORKDIR /incident-bot
