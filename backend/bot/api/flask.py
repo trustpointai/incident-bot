@@ -2,7 +2,7 @@ import config
 import json
 import re
 
-from bot.shared import tools
+from bot.utils import utils
 from datetime import timedelta
 from flasgger import Swagger
 from flask import Flask, request, Response
@@ -13,7 +13,7 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_marshmallow import Marshmallow
 from flask import Flask
-from iblog import logger
+from logger import logger
 
 """
 Run Init Tasks
@@ -73,7 +73,7 @@ def webserver_logging(response):
             '{} {} [{}] "{} {}" - {} - {} {}'.format(
                 request.headers.get("host"),
                 request.access_route[-1],
-                tools.fetch_timestamp(short=True),
+                utils.fetch_timestamp(short=True),
                 request.method,
                 request.path,
                 request.headers.get("user_agent"),

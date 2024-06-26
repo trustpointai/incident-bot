@@ -13,9 +13,8 @@ from sqlalchemy import (
     VARCHAR,
 )
 from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.mutable import MutableBase, MutableDict, MutableList
-from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.orm import declarative_base, scoped_session, sessionmaker
 
 
 engine = create_engine(
@@ -88,7 +87,7 @@ class Incident(Base, MutableBase, Serializer):
     postmortem = Column(VARCHAR)
     is_security_incident = Column(Boolean)
     channel_description = Column(String())
-    conference_bridge = Column(String())
+    meeting_link = Column(String())
     pagerduty_incidents = Column(MutableList.as_mutable(JSONB))
     jira_issues = Column(MutableList.as_mutable(JSONB))
 

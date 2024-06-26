@@ -3,9 +3,9 @@ import opsgenie_sdk
 import requests
 
 from bot.models.pg import OperationalData, Session
-from bot.shared import tools
+from bot.utils import utils
 from bot.slack.client import slack_workspace_id
-from iblog import logger
+from logger import logger
 from sqlalchemy import update
 from typing import Dict, List
 
@@ -146,7 +146,7 @@ class OpsgenieAPI:
                 .where(OperationalData.id == record_name)
                 .values(
                     json_data=self.list_rotations(),
-                    updated_at=tools.fetch_timestamp(),
+                    updated_at=utils.fetch_timestamp(),
                 )
             )
             Session.commit()
